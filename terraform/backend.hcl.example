@@ -1,0 +1,10 @@
+# Copy to `backend.hcl`, fill in your bucket/DynamoDB table, then run:
+#   terraform init -backend-config=backend.hcl
+#
+# Create the S3 bucket and DynamoDB table first (see SETUP_GUIDE.md).
+
+bucket         = "YOUR-GLOBALLY-UNIQUE-TFSTATE-BUCKET-NAME"
+key            = "eks-learning/terraform.tfstate"
+region         = "us-east-1"
+encrypt        = true
+dynamodb_table = "YOUR-TF-LOCKS-TABLE-NAME"

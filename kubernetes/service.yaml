@@ -1,0 +1,17 @@
+# ClusterIP publishes the Pod endpoints inside the cluster — Ingress points here.
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sample-app
+  namespace: demo
+  labels:
+    app.kubernetes.io/name: sample-app
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: sample-app
+  ports:
+    - name: http
+      port: 80
+      targetPort: http

@@ -1,0 +1,7 @@
+# Namespace isolates this demo app's RBAC/network policies if you extend the exercise later.
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: demo
+  labels:
+    app.kubernetes.io/name: eks-learning-sample

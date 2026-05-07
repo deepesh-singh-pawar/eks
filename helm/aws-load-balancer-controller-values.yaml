@@ -1,0 +1,16 @@
+# Values for aws-load-balancer-controller Helm chart.
+# Substitute CLUSTER_NAME / AWS_REGION / IRSA_ROLE_ARN / VPC_ID before install (see SETUP_GUIDE.md).
+#
+# Helm chart docs: https://kubernetes-sigs.github.io/aws-load-balancer-controller/
+
+clusterName: "CLUSTER_NAME"
+region: "AWS_REGION"
+
+# Optional but explicit VPC helps some environments converge faster during subnet/tag discovery drills.
+vpcId: "VPC_ID"
+
+serviceAccount:
+  create: true
+  annotations:
+    # IRSA binds this Kubernetes ServiceAccount identity to IAM role IAM permissions.
+    eks.amazonaws.com/role-arn: "IRSA_ROLE_ARN"

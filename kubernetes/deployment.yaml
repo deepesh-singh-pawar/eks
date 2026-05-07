@@ -1,0 +1,30 @@
+# Deployment runs stable replicas (Pods) backed by ReplicaSet-managed rolling updates.
+# Image story:
+#   - Fast path for learning: nginx:1.25-alpine (no registry auth required).
+#   - Interview story: replace with Terraform ECR repository URL built from `./app/Dockerfile`.
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-app
+  namespace: demo
+  labels:
+    app.kubernetes.io/name: sample-app
+spec:
+  replicas: 2 # Spread across AZs assuming your node group spans two subnets.
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: sample-app
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: sample-app
+    spec:
+      containers:
+        - name: app
+          # Replace via: terraform -chdir=terraform output -raw ecr_repository_url
+          # Example: "<account>.dkr.ecr.us-east-1.amazonaws.com/<repo>:latest"
+          image: nginx:1.25-alpine
+          ports:
+            - name: http
+              containerPort: 80
